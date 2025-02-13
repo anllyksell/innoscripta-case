@@ -1,57 +1,50 @@
-Installation & Setup
+## Installation & Setup
 
-1. Clone the Repository
-
+### 1. Clone the Repository
+```sh
 git clone <repository-url>
 cd innoscripta-case
 
-2. Install Dependencies
-
 npm install
+```
 
-3. Start the Development Server
-
+### 2. Start the Development Server
+```sh
 npm run dev
+```
 
-This will start the Vite development server. Open http://localhost:5173/ in your browser.
-
-4. Build for Production
-
+### 3. Build for Production
+```sh
 npm run build
+```
 
-5. Preview the Production Build
-
+### 4. Preview the Production Build
+```sh
 npm run preview
+```
 
-This will serve the production build locally.
+## Features
 
-Features
+- Fetch news articles from multiple sources
+- Filter articles by source, category, and search term
+- Responsive design for mobile and desktop
 
-News API Integration – Fetches articles from multiple news sources.
+## Technologies Used
 
-Search Functionality – Allows users to search for news by keyword.
+- React
+- TypeScript
+- Vite
+- Axios (for API requests)
+- Tailwind CSS (for styling)
 
-Source & Category Filtering – Users can filter by news source and category.
+## Contributing
 
-LocalStorage Persistence – Saves selected source and category settings.
+1. Fork the repository
+2. Create a new branch (`git checkout -b feature-branch`)
+3. Commit your changes (`git commit -m 'Add some feature'`)
+4. Push to the branch (`git push origin feature-branch`)
+5. Open a pull request
 
-Pagination Support – Allows users to navigate through pages of results.
-
-Tech Stack
-
-React 18
-
-TypeScript
-
-Vite (Fast build tool)
-
-Zustand (State management)
-
-Material UI (UI components)
-
-Axios (HTTP requests)
-
-License
+## License
 
 This project is licensed under the MIT License.
-
