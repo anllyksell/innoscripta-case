@@ -27,11 +27,13 @@ type NewsState = {
   pageSize: number
   currentPage: number
   articles: ArticleItem[]
+  error: string | null
   setPending: (pending: boolean) => void
   setSelectedSource: (source: SOURCE) => void
   setFilters: (filters: { fromDate?: string; toDate?: string; category?: string }) => void
   setCurrentPage: (page: number) => void
   setArticles: (articles: ArticleItem[], totalResults: number) => void
+  setError: (error: string | null) => void
   fetchCategories: () => Promise<void>
 }
 
@@ -44,6 +46,8 @@ export const useNewsStore = create<NewsState>((set, get) => ({
   pageSize: 10,
   currentPage: 1,
   articles: [],
+  error: null,
+  setError: (error: string | null) => set({ error }),
   setPending: (pending: boolean) => set({ pending }),
   setSelectedSource: (source: SOURCE) => {
     set({ selectedSource: source })

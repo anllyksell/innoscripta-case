@@ -12,17 +12,19 @@ import {
 } from '@mui/material'
 import { useNewsStore } from '../store/useNewsStore'
 
+const today = new Date().toISOString().split('T')[0]
+
 const FiltersModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const { setFilters, filters, categories, selectedSource, fetchCategories } = useNewsStore(
     state => state,
   )
-  const [fromDate, setFromDate] = useState(new Date().toISOString().split('T')[0])
-  const [toDate, setToDate] = useState(new Date().toISOString().split('T')[0])
+  const [fromDate, setFromDate] = useState(today)
+  const [toDate, setToDate] = useState(today)
   const [category, setCategory] = useState(filters.category ?? categories?.[0]?.id ?? '')
 
   useEffect(() => {
-    setFromDate(filters.fromDate || '')
-    setToDate(filters.toDate || '')
+    setFromDate(filters.fromDate || today)
+    setToDate(filters.toDate || today)
     setCategory(filters.category ?? categories?.[0]?.id ?? '')
   }, [filters, categories])
 

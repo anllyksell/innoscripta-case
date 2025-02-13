@@ -3,7 +3,7 @@ import { useNewsStore } from '../../store/useNewsStore'
 import './MainPage.css'
 
 const MainPage = () => {
-  const { articles, pending } = useNewsStore(state => state)
+  const { articles, pending, error } = useNewsStore(state => state)
 
   return (
     <div className="news-container">
@@ -12,6 +12,12 @@ const MainPage = () => {
           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
         >
           <CircularProgress />
+        </Box>
+      ) : error ? (
+        <Box
+          sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}
+        >
+          <p>Error: {error}</p>
         </Box>
       ) : (
         articles.map((n, i) => (

@@ -83,8 +83,9 @@ export class NYTimesAdapter implements NewsAdapter {
         imageUrl: item.multimedia?.[0]?.url || '',
       }))
       return { articles, totalResults: res.data.response.meta.hits }
-    } catch {
-      return { articles: [], totalResults: 0 }
+    } catch (error) {
+      console.error('Error fetching articles:', error)
+      throw new Error('Failed to fetch articles')
     }
   }
 }

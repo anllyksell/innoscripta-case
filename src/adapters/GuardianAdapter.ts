@@ -24,13 +24,18 @@ export class GuardianAdapter implements NewsAdapter {
   private apiKey = 'bdf48ad7-0c0d-40cd-be75-f4de56833fe0'
 
   fetchCategories = async (): Promise<Category[]> => {
-    const res = await axios.get<GuardianCategory>(
-      `https://content.guardianapis.com/sections?api-key=${this.apiKey}`,
-    )
-    return res.data.response.results.map((item: { id: string; webTitle: string }) => ({
-      id: item.id,
-      name: item.webTitle,
-    }))
+    try {
+      const res = await axios.get<GuardianCategory>(
+        `https://content.guardianapis.com/sections?api-key=${this.apiKey}`,
+      )
+      return res.data.response.results.map((item: { id: string; webTitle: string }) => ({
+        id: item.id,
+        name: item.webTitle,
+      }))
+    } catch (error) {
+      console.error('Error fetching categories:', error)
+      throw new Error('Failed to fetch categories')
+    }
   }
 
   fetchArticles = async (
@@ -58,8 +63,9 @@ export class GuardianAdapter implements NewsAdapter {
         publishedAt: item.webPublicationDate,
       }))
       return { articles, totalResults: res.data.response.total }
-    } catch {
-      return { articles: [], totalResults: 0 }
+    } catch (error) {
+      console.error('Error fetching articles:', error)
+      throw new Error('Failed to fetch articles')
     }
   }
 }

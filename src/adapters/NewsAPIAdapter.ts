@@ -26,13 +26,18 @@ export class NewsAPIAdapter implements NewsAdapter {
   private apiKey = '9acb521e5f0a49128f15b9424bf5ffb5'
 
   fetchCategories = async (): Promise<Category[]> => {
-    const response = await axios.get<NewsAPICategory>(
-      `https://newsapi.org/v2/top-headlines/sources?apiKey=${this.apiKey}`,
-    )
-    return response.data.sources.map((item: { id: string; name: string }) => ({
-      id: item.id,
-      name: item.name,
-    }))
+    try {
+      const response = await axios.get<NewsAPICategory>(
+        `https://newsapi.org/v2/top-headlines/sources?apiKey=${this.apiKey}`,
+      )
+      return response.data.sources.map((item: { id: string; name: string }) => ({
+        id: item.id,
+        name: item.name,
+      }))
+    } catch (error) {
+      console.error('Error fetching categories:', error)
+      throw new Error('Failed to fetch categories')
+    }
   }
 
   fetchArticles = async (
@@ -60,8 +65,9 @@ export class NewsAPIAdapter implements NewsAdapter {
         imageUrl: item.urlToImage,
       }))
       return { totalResults: response.data.totalResults, articles }
-    } catch {
-      return { totalResults: 0, articles: [] }
+    } catch (error) {
+      console.error('Error fetching articles:', error)
+      throw new Error('Failed to fetch articles')
     }
   }
 }
