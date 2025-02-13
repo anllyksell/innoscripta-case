@@ -23,6 +23,25 @@ npm run build
 npm run preview
 ```
 
+### 5. Docker Setup
+
+#### Build the Docker Image
+```sh
+docker build -t innoscripta-case .
+```
+
+#### Run the Docker Container
+```sh
+docker run -p 3000:3000 innoscripta-case
+```
+
+### Stop the Docker Container
+```sh
+docker ps
+docker stop <CONTAINER_ID>
+docker rm <CONTAINER_ID>
+```
+
 ## Features
 
 - Fetch news articles from multiple sources
